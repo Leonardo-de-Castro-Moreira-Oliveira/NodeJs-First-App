@@ -1,0 +1,116 @@
+$ npm i --save-dev @types/node
+$ npm install typescript ts-node @types/node --save-dev
+// Deve ser usado em typescript devido ao uso do 'require'.
+
+-> require ou import
+    - 'http' => Utilizado para importar os modulos necessarios a criar o server.
+
+-> status
+    - 100 -> Continue.
+    - 101 -> Switching Protocols.
+    - 102 -> Processing.
+    - 103 -> Early Hints.
+
+    - 200 -> Ok.
+    - 201 -> Created.
+    - 202 -> Accepted.
+    - 203 -> Non-Authoritative Information.
+    - 204 -> No Content.
+    - 205 -> Reset Content.
+    - 206 -> Partial Content.
+    - 207 -> Multi-Status.
+
+    - 404 -> Not-Found.
+
+
+----------------------------------------------------------------------
+-> http <-
+
+import * as http from 'node:http'
+
+createServer((request, response) => { ... })
+// Cria o servidor retornando um http.Server<..>.
+// request =>  http.IncomingMessage, è a requisição do servidor.
+// response => http.ServerResponse<http.IncomingMessage>, é o valor retornado ao servidor.
+
+response.writeHead(status, Example-{ 'Content-Type' :  'text/html' }) -> No <head></head> escreve a reasão especificada.
+response.write(message) -> Escreve no <body></body> o texto especificado.
+response.end() -> Indica o fim das respostas.
+
+request.url -> Uma string indicando o atual caminho dentro da host, por padrão '/'.
+
+server.listen(door, host, () => {}) -> Inicia o servidor indicando porta, onde será hospedado e executando uma função no caso de sucesso.
+----------------------------------------------------------------------
+-> url <-
+
+import * as url from 'node:url'
+
+parse(request.url, true) -> Passa a url para um objeto, onde é possivel acessar o que foi passado em /?var=key;
+
+----------------------------------------------------------------------
+-> fs & path <-
+
+import * as fs from 'node:fs'
+import * as path from 'node:path'
+
+-| path |-
+
+path.join(__dirname, "path") -> Recebe string[], coloca todas as partes de um path sem parenteses e junta de uma vez.
+
+-| fs |-
+
+readFile(path, enconding, (err, data) => { ... }) -> Recebe um path.join() e recebe err um erro ou null e data uma string
+com o conteudo do arquivo.
+
+appendFile(path: string, encoding: BufferEncoding, (err) => { ... }) -> Adiciona um arquivo ao servidor, err seria o erro ao criar.
+
+----------------------------------------------------------------------
+-> express <-
+
+import express from 'express'
+
+express() -> Retorna um novo app express.
+get('/path', (req, res) => { ... }) => Cria um tratamento para a url especificada.
+use(Router) -> Define o router com as rotas pré-definidas.
+
+'*' -> No caso de rota desconhecida.
+res.send(body) -> Define o documento como html e adiciona determinado conteudo a pagina.
+res.json(object) -> Define o documento como json para ser exibido e o exibe.
+res.redirect('path') -> Redireciona o cliente para determinado caminho.
+res.sendFile('filePath') -> Manda um arquivo como resposta.
+
+req.params -> Permite acessar as variaveis da url.
+
+----------------------------------------------------------------------
+-> router <-
+
+import { Router } from 'express'
+
+Router() -> Retorna um novo router para definir rotas.
+get -> O mesmo que o express.
+...
+
+----------------------------------------------------------------------
+-> events <-
+
+new EventEmitter() -> Cria um emissor de eventos
+    on('event', action) -> Adiciona um evento ao emissor.
+    emit('event') -> Emite/aciona um evento antesmente criado.
+
+----------------------------------------------------------------------
+-> mysql2 <-
+
+createConnection("mysql://<user>:<pass>@<host>:<port>/<database>") -> Retorna uma conecção.
+createPool({host, user, password, database}) -> Retorna uma conecção
+
+query(sql) -> Executa uma MySql query.
+commit() -> Salva as alterações.
+
+----------------------------------------------------------------------
+-> better-sqlite <-
+
+new Database('path.sqlite', { verbose: <> }) -> Cria um obtem um database, verbose é onde os logs iram ficar.
+exec('query') -> Executa uma query na database.
+prepare('query') -> Inicia uma transação.
+    all() -> Obtem-se o resultado.
+    run(...) -> Executa a transação completando os ? pelos valores indicados.
