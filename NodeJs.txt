@@ -23,6 +23,7 @@ $ npm install typescript ts-node @types/node --save-dev
     - 404 -> Not-Found.
 
 
+--|> !pass => u9T8A7eWXaW3QOli <!--
 ----------------------------------------------------------------------
 -> http <-
 
@@ -105,6 +106,15 @@ createPool({host, user, password, database}) -> Retorna uma conecção
 
 query(sql) -> Executa uma MySql query.
 commit() -> Salva as alterações.
+
+----------------------------------------------------------------------
+-> formidable <-
+
+new IncomingForm() -> Cria uma entrada de formulario.
+    parse(req, (err, camp, values) => {}) -> Permite obter os valores do formulario.
+        values.<name> -> Obtem-se a entrada correspondente.
+            path -> O path caso seja um arquivo.
+            name -> O nome caso seja um arquivo.
 
 ----------------------------------------------------------------------
 -> better-sqlite <-
