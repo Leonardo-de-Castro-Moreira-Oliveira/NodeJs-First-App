@@ -124,3 +124,19 @@ exec('query') -> Executa uma query na database.
 prepare('query') -> Inicia uma transação.
     all() -> Obtem-se o resultado.
     run(...) -> Executa a transação completando os ? pelos valores indicados.
+
+----------------------------------------------------------------------
+-> mongodb <-
+
+MongoClient -> Modulo para conexão por client.
+    connect('dbString') -> Retorna uma conexão do MongoDb.
+
+MongoClient.db
+    db('collection') -> Cria ou seleciona uma database no MongoDb.
+        collection('collection') -> Acessa ou cria uma coleção.
+            await insertOne(doc) -> Adiciona um item a coleção e retorna um InsertOneResult.
+            await insertMany([docs]) -> Adiciona multiplos itens a coleção.
+            await findOne(item) -> Retorna o elemento correspondente.
+            await find(item) -> Retorna todos os elementos correspondentes.
+            InsertOneResult() -> Resultado da inserção.
+                insertedId -> O id do item adicionado.
